@@ -1,9 +1,11 @@
 package prueba;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,10 +21,24 @@ public class Persona {
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Telefono> telefonos = new ArrayList<>();
 
+	@Embedded
+	private PruebaDate fechaNac;
+	
+	@Embedded
+	private Address direccion;
+	
 	public Persona() {
 
 	}
 
+	public void direccion(String dir) {
+		this.direccion = new Address(dir);
+	}
+	
+	public void fechaNacimiento(LocalDate fecha) {
+		this.fechaNac = new PruebaDate(fecha);
+	}
+	
 	public void addTelefono(Telefono t) {
 		this.telefonos.add(t);
 	}
@@ -49,5 +65,21 @@ public class Persona {
 
 	private void setId(int id) {
 		this.id = id;
+	}
+
+	private PruebaDate getFecha() {
+		return fechaNac;
+	}
+
+	private void setFecha(PruebaDate fecha) {
+		this.fechaNac = fecha;
+	}
+
+	private Address getDireccion() {
+		return direccion;
+	}
+
+	private void setDireccion(Address direccion) {
+		this.direccion = direccion;
 	}
 }
