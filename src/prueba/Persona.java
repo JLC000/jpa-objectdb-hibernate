@@ -26,8 +26,12 @@ public class Persona {
 	
 	@Embedded
 	private Address direccion;
-	
-	public Persona() {
+
+	public Persona(String nombre) {
+		this.nombre = nombre;
+	}
+
+	protected Persona() {
 
 	}
 

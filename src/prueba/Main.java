@@ -1,32 +1,29 @@
 package prueba;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
 public class Main {
 
 	public static void main(String args[]) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory("jpa-objectdb");
-		 		//.createEntityManagerFactory("jpa-derby");
+		// .createEntityManagerFactory("jpa-derby");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
 			tx.begin();
 
-//			 Persona p = new Persona();
-//			 p.setNombre("Enrique");
-//			
-//			 Telefono t = new Telefono("234234");
-//			 p.addTelefono(t);
-//			
-//			 em.persist(t);
-//			 em.persist(p);
+			// Persona p = new Persona();
+			// p.setNombre("Enrique");
+			//
+			// Telefono t = new Telefono("234234");
+			// p.addTelefono(t);
+			//
+			// em.persist(t);
+			// em.persist(p);
 
 			// objectdb soporta entidades sin PK
 			// EntidadSinPK e = new EntidadSinPK();
@@ -53,42 +50,47 @@ public class Main {
 			// p.fechaNacimiento(LocalDate.of(1980, 04, 06));
 			// em.persist(p);
 
-			// TypedQuery<Persona> q = em.createQuery(
-			// "select p from Persona p where p.fechaNac.fecha > :fecha1 and
-			// p.fechaNac.fecha < :fecha2",
-			// Persona.class);
-			// q.setParameter("fecha1", Date.valueOf(LocalDate.of(1950, 01,
-			// 01)));
-			// q.setParameter("fecha2", Date.valueOf(LocalDate.of(1979, 01,
-			// 01)));
-			// List<Persona> personas = q.getResultList();
-			// for (Persona persona : personas) {
-			// System.out.println(persona.getNombre());
-			// }
-
-//			Persona p = em.find(Persona.class, 7l);
-//			p.addTelefono(new Telefono("8888"));
-			
-//			TypedQuery<Persona> q = em.createQuery(
-//					"select p from Persona p where p.telefonos is not empty",
+//			TypedQuery<Persona> q = em.createQuery("select p from Persona p",
 //					Persona.class);
-			
+
 //			TypedQuery<Persona> q = em.createQuery(
-//			"select p from Persona p where size(p.telefonos) > 1",
-//			Persona.class);
-		
-			//join with collection
-			TypedQuery<Persona> q = em.createQuery(
-					"select p from Persona p join p.telefonos t where t.nro = :telefono",
-			Persona.class);
-			
-			q.setParameter("telefono", "8888");
-			
-			List<Persona> l = q.getResultList();
-			System.out.println(l.size());
-			for (Persona persona : l) {
-				System.out.println(persona.getNombre());
-			}
+//					"select p from Persona p where p.fechaNac.fecha > :fecha1 and p.fechaNac.fecha < :fecha2",
+//					Persona.class);
+//			 q.setParameter("fecha1", Date.valueOf(LocalDate.of(1950, 01,
+//			 01)));
+//			 q.setParameter("fecha2", Date.valueOf(LocalDate.of(1979, 01,
+//			 01)));
+//			 List<Persona> personas = q.getResultList();
+//			 for (Persona persona : personas) {
+//			 System.out.println(persona.getNombre());
+//			 }
+
+			// Persona p = em.find(Persona.class, 7l);
+			// p.addTelefono(new Telefono("8888"));
+
+			// TypedQuery<Persona> q = em.createQuery(
+			// "select p from Persona p where p.telefonos is not empty",
+			// Persona.class);
+
+			// TypedQuery<Persona> q = em.createQuery(
+			// "select p from Persona p where size(p.telefonos) > 1",
+			// Persona.class);
+
+			// join with collection
+//			TypedQuery<Persona> q = em.createQuery(
+//					"select p from Persona p join p.telefonos t where t.nro = :telefono",
+//					Persona.class);
+//
+//			q.setParameter("telefono", "8888");
+//
+//			List<Persona> l = q.getResultList();
+//			System.out.println(l.size());
+//			for (Persona persona : l) {
+//				System.out.println(persona.getNombre());
+//			}
+			 
+			Empleado e = new Empleado("Pablito", 1000);
+			em.persist(e);
 			
 			tx.commit();
 		} catch (Exception e) {
